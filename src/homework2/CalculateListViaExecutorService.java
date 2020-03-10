@@ -2,10 +2,7 @@ package homework2;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.Future;
+import java.util.concurrent.*;
 import java.util.stream.IntStream;
 
 public class CalculateListViaExecutorService {
@@ -17,9 +14,9 @@ public class CalculateListViaExecutorService {
 
         ExecutorService executorService = Executors.newFixedThreadPool(4);
 
-        SumCalculator sumCalculator = new SumCalculator(list);
+        Callable<Integer> sumCalculator = new SumCalculator(list);
 
-        Future result = executorService.submit(sumCalculator);
+        Future<Integer> result = executorService.submit(sumCalculator);
 
         try {
             System.out.println(result.get());

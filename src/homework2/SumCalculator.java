@@ -2,18 +2,17 @@ package homework2;
 
 import java.util.List;
 import java.util.concurrent.Callable;
-import java.util.stream.Collectors;
 
-public class SumCalculator implements Callable {
+public class SumCalculator implements Callable<Integer> {
 
-    List list;
+    private List<Integer> list;
 
-    public SumCalculator(List list) {
+    public SumCalculator(List<Integer> list) {
         this.list = list;
     }
 
     @Override
-    public Object call() throws Exception {
-        return list.stream().collect(Collectors.summingInt(Integer::intValue));
+    public Integer call() throws Exception {
+        return list.stream().mapToInt(Integer::intValue).sum();
     }
 }
